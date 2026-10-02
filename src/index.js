@@ -1,12 +1,19 @@
 const express = require("express");
 const {
     startServer,
-    stopServer
+    stopServer,
+    createServer
 } = require("./serverManager");
 
 const app = express();
 
 app.use(express.json());
+
+
+app.post("/api/server/create", (req, res) => {
+    createServer("MyTestServer", "26.2");
+    res.json({ message: "Creating Server"})
+})
 
 app.post("/api/server/start", (req, res) => {
     startServer("servers/test");
