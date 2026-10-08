@@ -75,8 +75,14 @@ function stopServer() {
     console.log("Stopping Minecraft server...");
 }
 
+function deleteServer() {
+    
+    console.log("Deleting Minecraft server...");
+}
+
 module.exports = {
     startServer,
     stopServer,
     createServer,
+    deleteServer,
 };

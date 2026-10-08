@@ -25,6 +25,11 @@ app.post("/api/server/stop", (req, res) => {
     res.json({ message: "Server stopping" });
 });
 
+app.post("/api/server/stop", (req, res) => {
+    stopServer();
+    deleteServer();
+    res.json({ message: "Server deleted" });
+});
 
 
 app.listen(3000, () => {
