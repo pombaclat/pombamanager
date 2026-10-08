@@ -2,7 +2,8 @@ const express = require("express");
 const {
     startServer,
     stopServer,
-    createServer
+    createServer,
+    deleteServer,
 } = require("./serverManager");
 
 const app = express();
