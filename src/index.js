@@ -35,3 +35,4 @@ app.post("/api/server/stop", (req, res) => {
 app.listen(3000, () => {
     console.log("Manager running on http://localhost:3000");
 });
+
