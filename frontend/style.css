@@ -1,0 +1,15 @@
+* {
+    --primary: #ffb3ff;
+    --primary-dark: #cf88cf;
+}
+
+.btn-primary { 
+    background-color: var(--primary);
+    border: solid 1px #989898;
+    border-radius: 6px;
+    font-size: 30px;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+}

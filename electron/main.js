@@ -1,5 +1,5 @@
 
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("node:path");
 
 function createWindow() {
@@ -11,10 +11,11 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
-      nodeIntegration: false
+      devTools: false,
+      nodeIntegration: true
     }
   });
-
+  // win.menuBarVisible = false;
   win.loadFile(path.join(__dirname, "../frontend/index.html"));
 }
 
@@ -26,6 +27,10 @@ app.whenReady().then(() => {
       createWindow();
     }
   });
+});
+
+ipcMain.on("frontend-message", (event, message) => {
+  console.log("Message from webpage:", message);
 });
 
 app.on("window-all-closed", () => {

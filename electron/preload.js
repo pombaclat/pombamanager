@@ -1,7 +1,9 @@
+const { contextBridge, ipcRenderer } = require("electron");
 
-const { contextBridge } = require("electron");
+contextBridge.exposeInMainWorld("electronAPI", {
+  getAppVersion: () =>
+    ipcRenderer.invoke("get-app-version"),
 
-contextBridge.exposeInMainWorld("pomba", {
-  appName: "PombaManager",
-  version: "1.0.0"
+  sendMessage: (message) =>
+    ipcRenderer.send("frontend-message", message)
 });
