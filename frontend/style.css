@@ -13,3 +13,7 @@
 .btn-primary:hover {
     background: var(--primary-dark);
 }
+
+#createServerModal {
+    display: none;
+}

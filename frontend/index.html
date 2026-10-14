@@ -11,6 +11,20 @@
         <div class="topbar">
             <button class="btn-primary" id="btn-create-server">Create</button>
         </div>
+
+        <div id="createServerModal">
+            <input type="text" id="createServerName">
+            <input type="text" id="createServerDescription">
+            <select name="version" id="createServerVersion">
+                <option value="1.8.9">1.8.9</option>
+                <option value="1.20.1">1.20.1</option>
+                <option value="1.21.1">1.21.1</option>
+                <option value="1.26.1">1.26.1</option>
+                <option value="26.1">26.1</option>
+            </select>
+            <input type="type" id="createServerType">
+            <button type="submit" id="createServerModalSubBtn">Submit</button>
+        </div>
     </div>
     <script src="app.js"></script>
 </body>

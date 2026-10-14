@@ -1,4 +1,3 @@
-
 {
   "name": "pombamanager",
   "version": "1.0.0",
@@ -10,5 +9,8 @@
   "devDependencies": {
     "electron": "^44.7.0",
     "electron-builder": "^26.15.3"
+  },
+  "allowScripts": {
+    "electron-winstaller@5.4.0": true
   }
 }

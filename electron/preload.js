@@ -4,6 +4,6 @@ contextBridge.exposeInMainWorld("electronAPI", {
   getAppVersion: () =>
     ipcRenderer.invoke("get-app-version"),
 
-  sendMessage: (message) =>
-    ipcRenderer.send("frontend-message", message)
+  createServer: (name, description, version, type) =>
+    ipcRenderer.send("createServerBtn", name, description, version, type)
 });
