@@ -3,7 +3,7 @@
     --primary-dark: #cf88cf;
 }
 
-.btn-primary { 
+.btn-primary {
     background-color: var(--primary);
     border: solid 1px #989898;
     border-radius: 6px;

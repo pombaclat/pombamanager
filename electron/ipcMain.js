@@ -1,10 +1,8 @@
-const fs = require('fs')
-const path = require('path')
 const { ipcMain } = require('electron');
-const { execSync } = require('child_process');
-
+const fs = require('fs')
 // Custom Functions/libs
-const { getRequiredJavaVersion, getInstalledJavaVersion } = require('./libs/java');
+const { getRequiredJavaVersion, getInstalledJavaVersion, createServerFolder, checkJavaInstallations } = require('./libs/createServerHelper');
+const { downloadPaperJar } = require('./libs/serverjars/papermc');
 
 
 
@@ -14,11 +12,33 @@ async function loadIpcHandler() {
 
     const server = { name, description, version, type };
     const requiredJavaVersion = getRequiredJavaVersion(server.version);
-    const installedJavaVersion = getInstalledJavaVersion()
+    const installedJavaVersion = getInstalledJavaVersion();
 
     if (requiredJavaVersion !== installedJavaVersion) {
-      console.log('Please install the required java version: ', requiredJavaVersion)
+      checkJavaInstallations();
     }
+
+    createServerFolder(name);
+    try {
+      fs.access(__dirname, '../servers', name);
+      console.log("Path exists");
+    } catch {
+      console.log("Path does not exist or is inaccessible");
+    }
+
+
+
+
+    // Download Server Jar file
+    switch (type) {
+      case 'paper':
+        downloadPaperJar(version, name);
+        break;
+
+      default:
+        break;
+    }
+
 
 
 
