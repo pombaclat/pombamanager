@@ -1,3 +1,4 @@
+const os = require("os");
 const fs = require("fs");
 const path = require("path");
 
@@ -38,16 +39,14 @@ function getRequiredJavaVersion(mcVersion) {
 // * ===============================
 function getInstalledJavaVersion() {
     // const installedJavaVersion = ;
-    return execSync('java --version').toString().match(/\d+/)[0];
+    try {
+        return execSync('java --version').toString().match(/\d+/)[0];
+    }  catch (error) {
+        return "No Java Version found!";
+    }  
 }
 
-
-
-
-function checkJavaInstallations() {
-    const fs = require("fs");
-    const path = require("path");
-    const os = require("os");
+function checkJavaInstallations() {;
 
     const home = os.homedir();
     const env = process.env;
@@ -63,7 +62,7 @@ function checkJavaInstallations() {
         env.JDK_HOME,
         env.JRE_HOME,
 
-        // PATH entries (may contain Java executables directly)
+        
         ...(env.PATH || "").split(path.delimiter),
 
         // User-level Java managers
@@ -82,16 +81,6 @@ function checkJavaInstallations() {
                 path.join(env["ProgramFiles(x86)"], "Java"),
                 env.ProgramFiles &&
                 path.join(env.ProgramFiles, "Eclipse Adoptium"),
-                env.ProgramFiles &&
-                path.join(env.ProgramFiles, "Microsoft"),
-                env.LOCALAPPDATA && path.join(env.LOCALAPPDATA, "Programs"),
-                env.LOCALAPPDATA && path.join(env.LOCALAPPDATA, "Microsoft"),
-                env.APPDATA && path.join(env.APPDATA, ".minecraft"),
-                env.APPDATA && path.join(env.APPDATA, "PrismLauncher"),
-                env.APPDATA && path.join(env.APPDATA, "ATLauncher"),
-                env.APPDATA && path.join(env.APPDATA, "Lunar Client"),
-                env.APPDATA && path.join(env.APPDATA, ".tlauncher"),
-                env.ProgramFiles && path.join(env.ProgramFiles, "Minecraft Launcher"),
                 "C:\\Java",
                 "C:\\jdk",
                 "C:\\jvm",
@@ -106,9 +95,6 @@ function checkJavaInstallations() {
                 "/opt/java",
                 "/opt/jdks",
                 "/snap",
-                path.join(home, ".minecraft"),
-                path.join(home, ".local/share/PrismLauncher"),
-                path.join(home, ".var/app"),
             ]
             : []),
 
