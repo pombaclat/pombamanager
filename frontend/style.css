@@ -1,6 +1,11 @@
 * {
     --primary: #ffb3ff;
     --primary-dark: #cf88cf;
+    --background: #161616;
+}
+
+body {
+    background: var(--background);
 }
 
 .btn-primary {
