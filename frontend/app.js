@@ -1,3 +1,23 @@
+// Server list
+document.addEventListener("DOMContentLoaded", async () => {
+    const list = document.getElementById("server-list");
+    const servers = await window.electronAPI.getServerList();
+
+    list.innerHTML = "";
+
+    servers.forEach((server) => {
+        const li = document.createElement("li");
+        li.textContent = server;
+        list.appendChild(li);
+    });
+});
+
+
+
+// BUTTONS
+// BUTTONS
+// BUTTONS
+// Create Button
 const createServerBtn = document.getElementById('btn-create-server')
 const createServerModalSubBtn = document.getElementById('createServerModalSubBtn')
 

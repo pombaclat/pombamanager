@@ -1,12 +1,14 @@
 const { ipcMain } = require('electron');
 const fs = require('fs')
+const path = require('path')
 // Custom Functions/libs
-const { getRequiredJavaVersion, getInstalledJavaVersion, createServerFolder, checkJavaInstallations } = require('./libs/createServerHelper');
+const { checkJavaInstallations } = require('./libs/createServerHelper');
 const { downloadPaperJar } = require('./libs/serverjars/papermc');
 
 
 
 async function loadIpcHandler() {
+
   ipcMain.on("createServerBtn", (event, name, description, version, type) => {
     const server = { name, description, version, type };
 
@@ -17,42 +19,34 @@ async function loadIpcHandler() {
     switch (server.type) {
       case 'paper':
         downloadPaperJar(server.version, server.name);
+        checkJavaInstallations();
         break;
 
       default:
         break;
     }
+  })
 
-    const requiredJavaVersion = getRequiredJavaVersion(server.version);
-    const installedJavaVersion = getInstalledJavaVersion();
 
-    if (requiredJavaVersion !== installedJavaVersion) {
-      checkJavaInstallations();
+
+  ipcMain.handle("getServerList", () => {
+    // Assumes the servers folder is next to this IPC file.
+    const dir = path.join(__dirname, "../servers");
+
+    if (!fs.existsSync(dir)) {
+      return [];
     }
+    console.log(
+      fs.readdirSync(dir, { withFileTypes: true })
+        .filter((entry) => entry.isDirectory())
+        .map((entry) => entry.name)
+    )
 
-    createServerFolder(server.name);
-    try {
-      fs.access(__dirname, '../servers', server.name);
-      console.log("Path exists");
-    } catch {
-      console.log("Path does not exist or is inaccessible");
-      return;
-    }
-
-
-
-
-    // Download Server Jar file
-
-
-
-
-
+    return fs.readdirSync(dir, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name);
   });
+
 }
-
-
-
-
 
 module.exports = loadIpcHandler;

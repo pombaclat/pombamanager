@@ -21,7 +21,7 @@ function createWindow() {
 
 app.whenReady().then(async () => {
   await loadIpcHandler();
-  
+
   createWindow();
 });
 

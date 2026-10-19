@@ -5,16 +5,7 @@ const path = require("path");
 const { execSync } = require('child_process')
 
 
-function createServerFolder(serverName) {
-    if (!/^[a-zA-Z0-9_-]+$/.test(serverName)) {
-        throw new Error("Invalid server name");
-    }
 
-    const folder = path.join(__dirname, "../../servers", serverName);
-    fs.mkdirSync(folder, { recursive: true });
-
-    return folder;
-}
 
 
 // * ===============================
@@ -34,19 +25,14 @@ function getRequiredJavaVersion(mcVersion) {
 }
 
 
-// * ===============================
-// ? check what version of java is installed 
-// * ===============================
-function getInstalledJavaVersion() {
-    // const installedJavaVersion = ;
-    try {
-        return execSync('java --version').toString().match(/\d+/)[0];
-    }  catch (error) {
-        return "No Java Version found!";
-    }  
-}
+function checkJavaInstallations() {
 
-function checkJavaInstallations() {;
+    try {
+        execSync('java --version').toString().match(/\d+/)[0];
+    } catch (error) {
+        console.log(error);
+    }
+
 
     const home = os.homedir();
     const env = process.env;
@@ -62,7 +48,7 @@ function checkJavaInstallations() {;
         env.JDK_HOME,
         env.JRE_HOME,
 
-        
+
         ...(env.PATH || "").split(path.delimiter),
 
         // User-level Java managers
@@ -104,8 +90,6 @@ function checkJavaInstallations() {;
                 path.join(home, "Library/Java/JavaVirtualMachines"),
                 "/opt/homebrew/opt",
                 "/usr/local/opt",
-                path.join(home, "Library/Application Support/minecraft"),
-                path.join(home, "Library/Application Support/PrismLauncher"),
             ]
             : []),
     ].filter(Boolean);
@@ -115,9 +99,7 @@ function checkJavaInstallations() {;
 
 }
 module.exports = {
-    createServerFolder,
     getRequiredJavaVersion,
-    getInstalledJavaVersion,
     checkJavaInstallations,
 
 }
