@@ -10,13 +10,15 @@
 
 <body>
     <div class="container">
+
         <div class="topbar">
+            <img class="banner" src="../../../Pictures/PombaClat/pombaclat-banner_compressed.png" alt="pombaclat banner">
             <button class="btn-primary" id="btn-create-server">Create</button>
         </div>
 
         <div id="createServerModal">
-            <input type="text" id="createServerName">
-            <input type="text" id="createServerDescription">
+            <input type="text" id="createServerName" placeholder="Name">
+            <input type="text" id="createServerDescription" placeholder="Description">
             <select name="version" id="createServerVersion">
                 <option value="1.8.9">1.8.9</option>
                 <option value="1.20.1">1.20.1</option>
@@ -24,13 +26,19 @@
                 <option value="1.26.1">1.26.1</option>
                 <option value="26.1">26.1</option>
             </select>
-            <input type="type" id="createServerType">
+            <select name="createServerType" id="createServerType">
+                <option value="paper">PaperMC</option>
+                <option value="vanilla">Vanilla</option>
+                <option value="pumpkin">Pumpkin</option>
+            </select>
             <button type="submit" id="createServerModalSubBtn">Submit</button>
         </div>
+
+        <ul class="server-list">
+            <!-- Javascript will insert the li's -->
+        </ul>
     </div>
 
-
-    <ul id="server-list"></ul>
 
 
     <script src="app.js"></script>

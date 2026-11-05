@@ -1,6 +1,14 @@
+
+
+
+
+
+
+
+
 // Server list
 document.addEventListener("DOMContentLoaded", async () => {
-    const list = document.getElementById("server-list");
+    const list = document.querySelector(".server-list");
     const servers = await window.electronAPI.getServerList();
 
     list.innerHTML = "";
@@ -9,20 +17,30 @@ document.addEventListener("DOMContentLoaded", async () => {
         const li = document.createElement("li");
         li.textContent = server;
         list.appendChild(li);
+
+        const card = document.createElement("div");
+        card.className = "card-server";
+        li.appendChild(card);
+
+        const button = document.createElement("button");
+        button.className =+ "btn-primary"
+        button.className =+ "btn-open-server"
+        button.textContent = "Open Server"
+        card.appendChild(button);
+
+        button.addEventListener("click", () => {
+            openPage('server', server);
+        })
     });
 });
 
 
-
-// BUTTONS
-// BUTTONS
-// BUTTONS
 // Create Button
 const createServerBtn = document.getElementById('btn-create-server')
 const createServerModalSubBtn = document.getElementById('createServerModalSubBtn')
 
 createServerBtn.addEventListener('click', () => {
-    document.getElementById('createServerModal').style.display = 'block';
+    document.getElementById('createServerModal').style.display = 'grid';
 })
 
 createServerModalSubBtn.addEventListener('click', () => {
@@ -33,3 +51,11 @@ createServerModalSubBtn.addEventListener('click', () => {
     window.electronAPI.createServer(name, description, version, type);
     document.getElementById('createServerModal').style.display = 'none';
 })
+
+
+function openPage(page, server) {
+    if (page == null) console.log('Page is required');
+    if (server == null) console.log('Invalid Server');
+
+    alert(`Page: ${page} | Server: ${server}`);
+}
