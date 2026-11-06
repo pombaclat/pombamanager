@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 // Server list
 document.addEventListener("DOMContentLoaded", async () => {
     const list = document.querySelector(".server-list");
@@ -34,7 +26,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 });
 
-
 // Create Button
 const createServerBtn = document.getElementById('btn-create-server')
 const createServerModalSubBtn = document.getElementById('createServerModalSubBtn')
@@ -51,7 +42,6 @@ createServerModalSubBtn.addEventListener('click', () => {
     window.electronAPI.createServer(name, description, version, type);
     document.getElementById('createServerModal').style.display = 'none';
 })
-
 
 function openPage(page, server) {
     if (page == null) console.log('Page is required');

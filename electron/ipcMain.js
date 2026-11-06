@@ -5,8 +5,6 @@ const path = require('path')
 const { checkJavaInstallations } = require('./libs/createServerHelper');
 const { downloadPaperJar } = require('./libs/serverjars/papermc');
 
-
-
 async function loadIpcHandler() {
 
   ipcMain.on("createServerBtn", (event, name, description, version, type) => {
@@ -26,8 +24,6 @@ async function loadIpcHandler() {
         break;
     }
   })
-
-
 
   ipcMain.handle("getServerList", () => {
     // Assumes the servers folder is next to this IPC file.

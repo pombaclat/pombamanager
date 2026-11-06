@@ -4,10 +4,6 @@ const path = require("path");
 
 const { execSync } = require('child_process')
 
-
-
-
-
 // * ===============================
 // ? get the required java version for a specific minecraft version. 
 // * ===============================
@@ -24,7 +20,6 @@ function getRequiredJavaVersion(mcVersion) {
     return 'Invalid Version!';
 }
 
-
 function checkJavaInstallations() {
 
     try {
@@ -32,7 +27,6 @@ function checkJavaInstallations() {
     } catch (error) {
         console.log(error);
     }
-
 
     const home = os.homedir();
     const env = process.env;
@@ -47,7 +41,6 @@ function checkJavaInstallations() {
         env.JAVA_HOME,
         env.JDK_HOME,
         env.JRE_HOME,
-
 
         ...(env.PATH || "").split(path.delimiter),
 
