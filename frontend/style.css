@@ -1,29 +1,107 @@
 * {
+    margin: 0;
+    padding: 0;
+    scrollbar-width: none;
+
     --primary: #ffb3ff;
     --primary-dark: #cf88cf;
     --background: #161616;
 }
 
 body {
+    box-sizing: border-box;
     background: var(--background);
+
 }
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+
 
 .btn-primary {
     background-color: var(--primary);
     border: solid 1px #989898;
     border-radius: 6px;
     font-size: 30px;
+    padding: 5px 20px;
+    cursor: pointer;
 }
 
 .btn-primary:hover {
     background: var(--primary-dark);
 }
 
-#createServerModal {
-    display: none;
+.banner {
+    width: 20%;
 }
 
-li {
+
+#createServerModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.8);
+    
+    align-content: center;
+    justify-content: center;
+    
+}
+
+#createServerModal input,
+#createServerModal select,
+#createServerModal option,
+#createServerModal button {
+    min-width: 200px;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background: #222;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+#createServerModal button {
+    background: var(--primary);
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+
+#createServerModal button:hover {
+    background: var(--primary-dark);
+}
+
+.server-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px;
+}
+
+.server-list li {
     color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #2a2a2a;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    list-style: none;
 }
